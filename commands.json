@@ -1,0 +1,18 @@
+{
+    "commands": {
+        "bật đèn": [
+            "bật đèn",
+            "mở đèn",
+            "cho đèn sáng"
+        ],
+        "tắt đèn": [
+            "tắt đèn",
+            "đóng đèn",
+            "cho đèn tắt",
+            "tắt bóng đèn"
+        ],
+        "chào bạn": [
+            "alo"
+        ]
+    }
+}

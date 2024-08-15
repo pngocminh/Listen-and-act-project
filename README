@@ -1,0 +1,9 @@
+project_root/
+│
+├── main.py              # Hàm chính để bắt đầu ứng dụng
+├── speech_utils.py      # Chứa các hàm xử lý âm thanh (chuyển văn bản thành giọng nói)
+├── command_manager.py   # Chứa các hàm để tải và lưu lệnh
+├── action_performer.py  # Chứa các hàm để thực hiện lệnh và xử lý lệnh gần đúng
+├── commands.json        # File JSON lưu trữ các lệnh và từ đồng nghĩa
+├── requirements.txt     # File liệt kê các thư viện cần thiết
+└── README.md            # File hướng dẫn sử dụng và cài đặt

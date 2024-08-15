@@ -20,11 +20,24 @@ def suggest_similar_commands(text, commands):
                 break
     return suggestions
 
+def turn_on_light():
+    synthesize_speech("Đang bật đèn.", speed=1.0)
+
+def turn_off_light():
+    synthesize_speech("Đang tắt đèn.", speed=1.0)
+
+def handle_invalid_action():
+    synthesize_speech("Lệnh không hợp lệ.", speed=1.0)
+
 def perform_action(action):
-    """Thực hiện hành động dựa trên lệnh được nhận diện."""
-    if action == "bật đèn":
-        synthesize_speech("Đang bật đèn.", speed=1.0)
-    elif action == "tắt đèn":
-        synthesize_speech("Đang tắt đèn.", speed=1.0)
-    else:
-        synthesize_speech("Lệnh không hợp lệ.", speed=1.0)
+    # Tạo dictionary ánh xạ các hành động đến các hàm xử lý tương ứng
+    actions = {
+        "bật đèn": turn_on_light,
+        "tắt đèn": turn_off_light
+    }
+    
+    # Lấy hàm xử lý tương ứng, nếu không tìm thấy thì dùng handle_invalid_action
+    action_func = actions.get(action, handle_invalid_action)
+    
+    # Thực thi hàm
+    action_func()

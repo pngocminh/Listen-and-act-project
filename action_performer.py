@@ -21,13 +21,13 @@ def suggest_similar_commands(text, commands):
     return suggestions
 
 def turn_on_light():
-    synthesize_speech("Đang bật đèn.", speed=1.0)
+    synthesize_speech("Đang bật đèn." )
 
 def turn_off_light():
-    synthesize_speech("Đang tắt đèn.", speed=1.0)
+    synthesize_speech("Đang tắt đèn." )
 
 def handle_invalid_action():
-    synthesize_speech("Lệnh không hợp lệ.", speed=1.0)
+    synthesize_speech("Lệnh không hợp lệ." )
 
 def perform_action(action):
     # Tạo dictionary ánh xạ các hành động đến các hàm xử lý tương ứng

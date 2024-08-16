@@ -3,9 +3,9 @@ import io
 from pydub import AudioSegment
 from pydub.playback import play
 
-def synthesize_speech(text, speed=1.0):
+def synthesize_speech(text, speed=1.3):
     """Chuyển đổi văn bản thành âm thanh và phát âm thanh đó."""
-    tts = gTTS(text=text, lang='vi')
+    tts = gTTS(text=text, lang='vi', slow=False)
     fp = io.BytesIO()
     tts.write_to_fp(fp)
     fp.seek(0)
@@ -17,3 +17,4 @@ def synthesize_speech(text, speed=1.0):
         audio = audio.set_frame_rate(audio.frame_rate)
     
     play(audio)
+synthesize_speech("Xin chào, bạn khỏe không?")

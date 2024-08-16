@@ -31,7 +31,7 @@ def listen_and_respond():
                     if suggestions:
                         suggestion_text = "Hoặc có thể bạn muốn: " + ", ".join(suggestions)
                         response = f"Lệnh không rõ ràng. {suggestion_text}"
-                        synthesize_speech(response, speed=1.0)
+                        synthesize_speech(response)
                         
                         # Cung cấp thông tin chi tiết cho các lựa chọn
                         detail_text = "Các lựa chọn của bạn là: "
@@ -40,7 +40,7 @@ def listen_and_respond():
                         
                         # Yêu cầu người dùng chọn lệnh bằng số
                         while True:
-                            synthesize_speech(f"{detail_text}Vui lòng chọn lệnh chính xác bằng cách nói số.", speed=1.0)
+                            synthesize_speech(f"{detail_text}Vui lòng chọn lệnh chính xác bằng cách nói số.")
                             audio_data = recognizer.listen(source, timeout=5, phrase_time_limit=10)
                             user_choice = recognizer.recognize_google(audio_data, language='vi-VN').lower()
                             
@@ -58,7 +58,7 @@ def listen_and_respond():
                                             commands[chosen_command] = [text]
                                         save_commands(commands)
                                         # Xác nhận lệnh mới đã được lưu
-                                        synthesize_speech(f"Lệnh '{chosen_command}' đã được lưu.", speed=1.0)
+                                        synthesize_speech(f"Lệnh '{chosen_command}' đã được lưu.")
                                         # Đọc lại các lệnh từ file JSON
                                         commands = load_commands()
                                         # Kiểm tra lại lệnh mới
@@ -67,21 +67,21 @@ def listen_and_respond():
                                             perform_action(action)
                                         break
                                     else:
-                                        synthesize_speech("Số không hợp lệ. Vui lòng thử lại.", speed=1.0)
+                                        synthesize_speech("Số không hợp lệ. Vui lòng thử lại.")
                                 else:
-                                    synthesize_speech("Vui lòng nói số hợp lệ.", speed=1.0)
+                                    synthesize_speech("Vui lòng nói số hợp lệ.")
                             except ValueError:
-                                synthesize_speech("Tôi không nghe rõ số bạn nói. Vui lòng thử lại.", speed=1.0)
+                                synthesize_speech("Tôi không nghe rõ số bạn nói. Vui lòng thử lại.")
                         
                     else:
                         # Không có gợi ý, yêu cầu người dùng nhập lệnh mới
-                        synthesize_speech("Lệnh không rõ ràng. Bạn có muốn lưu lệnh này không? Nói 'Có' hoặc 'OK' để lưu hoặc 'Không' để bỏ qua.", speed=1.0)
+                        synthesize_speech("Lệnh không rõ ràng. Bạn có muốn lưu lệnh này không? Nói 'Có' hoặc 'OK' để lưu hoặc 'Không' để bỏ qua.")
                         while True:
                             audio_data = recognizer.listen(source, timeout=5, phrase_time_limit=10)
                             user_response = recognizer.recognize_google(audio_data, language='vi-VN').lower()
                             
                             if "có" in user_response or "ok" in user_response:
-                                synthesize_speech("Vui lòng nói rõ lệnh bạn muốn lưu.", speed=1.0)
+                                synthesize_speech("Vui lòng nói rõ lệnh bạn muốn lưu.")
                                 audio_data = recognizer.listen(source, timeout=5, phrase_time_limit=10)
                                 new_command = recognizer.recognize_google(audio_data, language='vi-VN').lower()
                                 # Lưu lệnh mới vào file JSON
@@ -91,7 +91,7 @@ def listen_and_respond():
                                     commands[new_command] = [text]
                                 save_commands(commands)
                                 # Xác nhận lệnh mới đã được lưu
-                                synthesize_speech(f"Lệnh '{new_command}' đã được lưu.", speed=1.0)
+                                synthesize_speech(f"Lệnh '{new_command}' đã được lưu.")
                                 # Đọc lại các lệnh từ file JSON
                                 commands = load_commands()
                                 # Kiểm tra lại lệnh mới
@@ -99,22 +99,22 @@ def listen_and_respond():
                                 if action:
                                     perform_action(action)
                                 else:
-                                    synthesize_speech(f"Lệnh '{new_command}' không hợp lệ. Vui lòng kiểm tra lại.", speed=1.0)
+                                    synthesize_speech(f"Lệnh '{new_command}' không hợp lệ. Vui lòng kiểm tra lại.")
                                 break
                             elif "không" in user_response or "no" in user_response:
-                                synthesize_speech("Lệnh đã bị bỏ qua.", speed=1.0)
+                                synthesize_speech("Lệnh đã bị bỏ qua.")
                                 break
                             else:
-                                synthesize_speech("Tôi không hiểu bạn nói gì. Vui lòng thử lại.", speed=1.0)
+                                synthesize_speech("Tôi không hiểu bạn nói gì. Vui lòng thử lại.")
                 
             except sr.UnknownValueError:
                 print("Không thể hiểu âm thanh.")
-                synthesize_speech("Xin lỗi, tôi không thể hiểu bạn.", speed=1.0)
+                synthesize_speech("Xin lỗi, tôi không thể hiểu bạn.")
             except sr.WaitTimeoutError:
                 continue
             except sr.RequestError as e:
                 print(f"Lỗi kết nối với dịch vụ nhận diện giọng nói: {e}")
-                synthesize_speech("Xin lỗi, có lỗi với dịch vụ nhận diện giọng nói.", speed=1.0)
+                synthesize_speech("Xin lỗi, có lỗi với dịch vụ nhận diện giọng nói.")
                 break
 
 def main():
